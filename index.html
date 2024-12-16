@@ -3,10 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Simple Website</title>
+    <title>My Interactive Website</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #0073e6, #e66465);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.5);
+            width: 100%;
+            padding: 20px;
+            position: fixed;
+            top: 0;
+            display: flex;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #ffd700;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            animation: fadeIn 2s ease;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            animation: fadeIn 2.5s ease;
+        }
+
+        button {
+            background: #ffd700;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            color: #333;
+            transition: transform 0.2s ease, background-color 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            background-color: #ffb900;
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 10px;
+            font-size: 0.9rem;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to My Website</h1>
-    <p>This is a simple website hosted on GitHub Pages.</p>
+    <header>
+        <nav>
+            <a href="#about">About</a>
+            <a href="#features">Features</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Welcome to My Interactive Website</h1>
+        <p>Explore the beauty of a simple yet elegant webpage.</p>
+        <button onclick="alert('Thanks for clicking! 😊')">Click Me!</button>
+    </main>
+
+    <section id="about" style="margin-top: 80px;">
+        <h2>About</h2>
+        <p>This website is created using HTML, CSS, and JavaScript.</p>
+    </section>
+
+    <section id="features">
+        <h2>Features</h2>
+        <ul>
+            <li>Modern design</li>
+            <li>Interactive elements</li>
+            <li>Responsive layout</li>
+        </ul>
+    </section>
+
+    <section id="contact">
+        <h2>Contact</h2>
+        <p>Email: myemail@example.com</p>
+    </section>
+
+    <footer>
+        &copy; 2024 My Interactive Website. All rights reserved.
+    </footer>
 </body>
 </html>
