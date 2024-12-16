@@ -1,0 +1,12 @@
+SrNo,TableName,Dimension,Result
+1,hub_vendor,Uniqueness,Passed
+2,hub_vendor,Validity,Passed
+3,hub_vendor,Consistency,Passed
+4,hub_pant,Uniqueness,Passed
+5,hub_pant,Validity,Passed
+6,hub_pant,Consistency,Passed
+7,hub_material,Uniqueness,Passed
+8,hub_material,Validity,Passed
+9,hub_material,Consistency,Passed
+10,SAT_PO_TRANS,Uniqueness,Passed
+11,SAT_PO_TRANS,Validity,Passed
