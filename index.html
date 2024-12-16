@@ -5,26 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Quality Results</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <h1>Data Quality Results</h1>
+    <header class="hero">
+        <h1>Data Quality Dashboard</h1>
+        <p>Monitor your data quality with detailed insights and results.</p>
     </header>
     <main>
-        <table id="data-table">
-            <thead>
-                <tr>
-                    <th>SrNo</th>
-                    <th>TableName</th>
-                    <th>Dimension</th>
-                    <th>Result</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Data will be dynamically populated here -->
-            </tbody>
-        </table>
+        <section class="search-bar">
+            <input type="text" id="search-input" placeholder="Search by TableName or Dimension..." />
+        </section>
+        <section class="table-container">
+            <table id="data-table">
+                <thead>
+                    <tr>
+                        <th>SrNo</th>
+                        <th>TableName</th>
+                        <th>Dimension</th>
+                        <th>Result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Data will be dynamically populated here -->
+                </tbody>
+            </table>
+        </section>
     </main>
+    <footer>
+        <p>© 2024 Data Quality Dashboard. All Rights Reserved.</p>
+    </footer>
     <script src="script.js"></script>
 </body>
 </html>
