@@ -1,18 +1,29 @@
-<div id="Certification" class="tabcontent">
-    <h2>Certification</h2>
-    <div id="certification-graph"></div>
-    <h3>Data Table</h3>
-    <table id="certification-table" border="1">
-        <thead>
-            <tr>
-                <th>SrNo</th>
-                <th>TableName</th>
-                <th>Dimension</th>
-                <th>Result</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Data will be dynamically inserted here -->
-        </tbody>
-    </table>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Tabs</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.plot.ly/plotly-2.25.2.min.js"></script>
+</head>
+<body>
+    <h1>Data Tabs</h1>
+    <div class="tabs">
+        <button class="tablinks" onclick="openTab(event, 'Certification')">Certification</button>
+        <button class="tablinks" onclick="openTab(event, 'Quality')">Quality</button>
+    </div>
+
+    <div id="Certification" class="tabcontent">
+        <h2>Certification</h2>
+        <div id="certification-graph"></div>
+    </div>
+
+    <div id="Quality" class="tabcontent">
+        <h2>Quality</h2>
+        <div id="quality-graph"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
