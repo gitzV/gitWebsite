@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
         complete: function (results) {
             console.log("CSV Loaded Successfully:", results.data);
             fullData = results.data; // Save the full data for later use
-            populateCertificationTab(fullData); // Populate initial table
+            populateCertificationTab(fullData); // Populate the table initially
         },
         error: function (error) {
             console.error("Error loading CSV file:", error);
@@ -19,9 +19,9 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("defaultTab").click();
 });
 
-// Function to populate the Certification tab
+// Function to populate the Certification tab with data
 function populateCertificationTab(data) {
-    const certificationTab = document.getElementById("Certification");
+    const tableContainer = document.getElementById("tableContainer");
     const table = document.createElement("table");
 
     // Add table headers
@@ -45,8 +45,8 @@ function populateCertificationTab(data) {
         });
     });
 
-    certificationTab.innerHTML = ""; // Clear existing content
-    certificationTab.appendChild(table);
+    tableContainer.innerHTML = ""; // Clear existing content
+    tableContainer.appendChild(table);
 }
 
 // Function to search data by TableName
@@ -56,7 +56,7 @@ function searchData() {
         return row.TableName.toLowerCase().includes(searchInput); // Case-insensitive search
     });
 
-    populateCertificationTab(filteredData); // Populate table with filtered data
+    populateCertificationTab(filteredData); // Populate the table with filtered data
 }
 
 // Tab switching functionality
