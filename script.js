@@ -1,40 +1,67 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const tableBody = document.querySelector("#data-table tbody");
-    const searchInput = document.getElementById("search-input");
-
-    fetch("data.csv")
+    fetch('data.csv')
         .then(response => response.text())
         .then(data => {
-            const rows = data.split("\n").slice(1); // Exclude header
-            rows.forEach(row => {
-                if (row.trim()) {
-                    const cols = row.split(",");
-                    const tr = document.createElement("tr");
-                    cols.forEach((col, index) => {
-                        const td = document.createElement("td");
-                        td.textContent = col.trim();
-                        if (index === 3) {
-                            // Add icons to the "Result" column
-                            td.innerHTML = col.trim() === "Passed" 
-                                ? `${col} <i class="fas fa-check-circle" style="color:green;"></i>` 
-                                : `${col} <i class="fas fa-times-circle" style="color:red;"></i>`;
-                        }
-                        tr.appendChild(td);
-                    });
-                    tableBody.appendChild(tr);
-                }
+            const rows = data.split("\n").slice(1); // Skip header
+            const parsedData = rows.map(row => {
+                const [SrNo, TableName, Dimension, Result] = row.split(",");
+                return { SrNo, TableName, Dimension, Result };
             });
 
-            // Add search/filter functionality
-            searchInput.addEventListener("input", () => {
-                const filter = searchInput.value.toLowerCase();
-                const rows = tableBody.querySelectorAll("tr");
-                rows.forEach(row => {
-                    const cells = row.querySelectorAll("td");
-                    const matches = Array.from(cells).some(cell => cell.textContent.toLowerCase().includes(filter));
-                    row.style.display = matches ? "" : "none";
-                });
-            });
-        })
-        .catch(error => console.error("Error loading data:", error));
+            populateCertificationGraph(parsedData);
+            populateQualityGraph(parsedData);
+        });
 });
+
+function openTab(evt, tabName) {
+    const tabcontent = document.getElementsByClassName("tabcontent");
+    for (let i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    const tablinks = document.getElementsByClassName("tablinks");
+    for (let i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+
+function populateCertificationGraph(data) {
+    const tableNames = [...new Set(data.map(row => row.TableName))];
+    const counts = tableNames.map(name =>
+        data.filter(row => row.TableName === name && row.Result.trim() === "Passed").length
+    );
+
+    const trace = {
+        x: tableNames,
+        y: counts,
+        type: "bar"
+    };
+
+    const layout = {
+        title: "Certification Results",
+        xaxis: { title: "Table Names" },
+        yaxis: { title: "Passed Dimensions" }
+    };
+
+    Plotly.newPlot('certification-graph', [trace], layout);
+}
+
+function populateQualityGraph(data) {
+    const dimensions = [...new Set(data.map(row => row.Dimension))];
+    const counts = dimensions.map(dim =>
+        data.filter(row => row.Dimension === dim && row.Result.trim() === "Passed").length
+    );
+
+    const trace = {
+        x: dimensions,
+        y: counts,
+        type: "pie"
+    };
+
+    const layout = {
+        title: "Quality Results"
+    };
+
+    Plotly.newPlot('quality-graph', [trace], layout);
+}
