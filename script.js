@@ -1,3 +1,5 @@
+let fullData = [];
+
 document.addEventListener("DOMContentLoaded", () => {
     // Load CSV file using PapaParse
     Papa.parse("data.csv", {
@@ -5,7 +7,8 @@ document.addEventListener("DOMContentLoaded", () => {
         header: true,
         complete: function (results) {
             console.log("CSV Loaded Successfully:", results.data);
-            populateCertificationTab(results.data);
+            fullData = results.data; // Save the full data for later use
+            populateCertificationTab(fullData); // Populate initial table
         },
         error: function (error) {
             console.error("Error loading CSV file:", error);
@@ -44,6 +47,16 @@ function populateCertificationTab(data) {
 
     certificationTab.innerHTML = ""; // Clear existing content
     certificationTab.appendChild(table);
+}
+
+// Function to search data by TableName
+function searchData() {
+    const searchInput = document.getElementById("searchInput").value.toLowerCase();
+    const filteredData = fullData.filter(row => {
+        return row.TableName.toLowerCase().includes(searchInput); // Case-insensitive search
+    });
+
+    populateCertificationTab(filteredData); // Populate table with filtered data
 }
 
 // Tab switching functionality
