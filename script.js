@@ -49,14 +49,29 @@ function populateCertificationTab(data) {
     tableContainer.appendChild(table);
 }
 
-// Function to search data by TableName
+// Function to search data by TableName or any matching text in any column
 function searchData() {
     const searchInput = document.getElementById("searchInput").value.toLowerCase();
+    if (!searchInput) {
+        // If search box is empty, display the full table
+        populateCertificationTab(fullData);
+        return;
+    }
+
     const filteredData = fullData.filter(row => {
-        return row.TableName.toLowerCase().includes(searchInput); // Case-insensitive search
+        // Check if any column value contains the search input
+        return Object.values(row).some(value =>
+            value.toString().toLowerCase().includes(searchInput)
+        );
     });
 
-    populateCertificationTab(filteredData); // Populate the table with filtered data
+    if (filteredData.length > 0) {
+        populateCertificationTab(filteredData); // Display filtered data
+    } else {
+        // Display "No data found" if no matches
+        const tableContainer = document.getElementById("tableContainer");
+        tableContainer.innerHTML = `<p style="color: red; font-weight: bold;">No matching data found</p>`;
+    }
 }
 
 // Tab switching functionality
