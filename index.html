@@ -3,28 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Tabs</title>
+    <title>Certification Tab</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.plot.ly/plotly-2.25.2.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    <script defer src="script.js"></script>
 </head>
 <body>
-    <h1>Data Tabs</h1>
+    <h1>Data Validation Dashboard</h1>
     <div class="tabs">
-        <button class="tablinks" onclick="openTab(event, 'Certification')">Certification</button>
+        <button class="tablinks" onclick="openTab(event, 'Certification')" id="defaultTab">Certification</button>
         <button class="tablinks" onclick="openTab(event, 'Quality')">Quality</button>
     </div>
 
     <div id="Certification" class="tabcontent">
-        <h2>Certification</h2>
-        <div id="certification-graph"></div>
+        <h2>Certification Data</h2>
+        <!-- Data from CSV will be dynamically inserted here -->
     </div>
 
     <div id="Quality" class="tabcontent">
-        <h2>Quality</h2>
-        <div id="quality-graph"></div>
+        <h2>Quality Data</h2>
+        <p>This section is under development.</p>
     </div>
-
-    <script src="script.js"></script>
 </body>
 </html>
