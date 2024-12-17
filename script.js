@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // Fetch the CSV data
     fetch('data.csv')
         .then(response => response.text())
         .then(data => {
@@ -8,60 +9,36 @@ document.addEventListener("DOMContentLoaded", () => {
                 return { SrNo, TableName, Dimension, Result };
             });
 
-            populateCertificationGraph(parsedData);
-            populateQualityGraph(parsedData);
+            // Populate the Certification tab
+            populateCertificationTab(parsedData);
         });
 });
 
-function openTab(evt, tabName) {
-    const tabcontent = document.getElementsByClassName("tabcontent");
-    for (let i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-    }
-    const tablinks = document.getElementsByClassName("tablinks");
-    for (let i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
-    }
-    document.getElementById(tabName).style.display = "block";
-    evt.currentTarget.className += " active";
-}
+// Populate the Certification tab with data
+function populateCertificationTab(data) {
+    const certificationTab = document.getElementById("Certification");
+    const table = document.createElement("table");
 
-function populateCertificationGraph(data) {
-    const tableNames = [...new Set(data.map(row => row.TableName))];
-    const counts = tableNames.map(name =>
-        data.filter(row => row.TableName === name && row.Result.trim() === "Passed").length
-    );
+    // Add table headers
+    const headers = ["SrNo", "TableName", "Dimension", "Result"];
+    const thead = table.createTHead();
+    const headerRow = thead.insertRow();
+    headers.forEach(header => {
+        const th = document.createElement("th");
+        th.textContent = header;
+        headerRow.appendChild(th);
+    });
 
-    const trace = {
-        x: tableNames,
-        y: counts,
-        type: "bar"
-    };
+    // Add table rows
+    const tbody = table.createTBody();
+    data.forEach(row => {
+        const tr = tbody.insertRow();
+        Object.values(row).forEach(cellData => {
+            const td = document.createElement("td");
+            td.textContent = cellData;
+            tr.appendChild(td);
+        });
+    });
 
-    const layout = {
-        title: "Certification Results",
-        xaxis: { title: "Table Names" },
-        yaxis: { title: "Passed Dimensions" }
-    };
-
-    Plotly.newPlot('certification-graph', [trace], layout);
-}
-
-function populateQualityGraph(data) {
-    const dimensions = [...new Set(data.map(row => row.Dimension))];
-    const counts = dimensions.map(dim =>
-        data.filter(row => row.Dimension === dim && row.Result.trim() === "Passed").length
-    );
-
-    const trace = {
-        x: dimensions,
-        y: counts,
-        type: "pie"
-    };
-
-    const layout = {
-        title: "Quality Results"
-    };
-
-    Plotly.newPlot('quality-graph', [trace], layout);
+    certificationTab.appendChild(table);
 }
