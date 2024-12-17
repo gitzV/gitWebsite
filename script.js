@@ -1,20 +1,18 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Fetch the CSV data
-    fetch('data.csv')
-        .then(response => response.text())
-        .then(data => {
-            const rows = data.split("\n").slice(1); // Skip header
-            const parsedData = rows.map(row => {
-                const [SrNo, TableName, Dimension, Result] = row.split(",");
-                return { SrNo, TableName, Dimension, Result };
-            });
-
-            // Populate the Certification tab
-            populateCertificationTab(parsedData);
-        });
+    // Use PapaParse to parse the CSV file
+    Papa.parse("data.csv", {
+        download: true,
+        header: true,
+        complete: function (results) {
+            const data = results.data; // Parsed data as an array of objects
+            populateCertificationTab(data);
+        },
+        error: function (error) {
+            console.error("Error loading CSV file:", error);
+        }
+    });
 });
 
-// Populate the Certification tab with data
 function populateCertificationTab(data) {
     const certificationTab = document.getElementById("Certification");
     const table = document.createElement("table");
@@ -33,9 +31,9 @@ function populateCertificationTab(data) {
     const tbody = table.createTBody();
     data.forEach(row => {
         const tr = tbody.insertRow();
-        Object.values(row).forEach(cellData => {
+        headers.forEach(header => {
             const td = document.createElement("td");
-            td.textContent = cellData;
+            td.textContent = row[header]; // Match header with object key
             tr.appendChild(td);
         });
     });
