@@ -1,34 +1,37 @@
-/* Global Styling */
 body {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f9;
-    color: #333;
-    line-height: 1.6;
+    font-family: Arial, sans-serif;
 }
 
-/* Hero Section */
-header.hero {
-    text-align: center;
-    padding: 2rem;
-    background: url('https://via.placeholder.com/1500x500') no-repeat center center/cover;
-    color: white;
+.tabs {
+    overflow: hidden;
+    background: #f1f1f1;
+    border-bottom: 1px solid #ccc;
 }
 
-header.hero h1 {
-    font-size: 2.5rem;
-    margin: 0.5rem 0;
+.tablinks {
+    background: #ddd;
+    border: none;
+    outline: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
-header.hero p {
-    font-size: 1.2rem;
+.tablinks:hover {
+    background: #bbb;
 }
 
-/* Search Bar */
-.search-bar {
-    text-align: center;
-    margin: 1rem 0;
+.tablinks.active {
+    background: #999;
 }
 
-.search-bar input
+.tabcontent {
+    display: none;
+    padding: 20px;
+    animation: fadeEffect 0.5s;
+}
+
+@keyframes fadeEffect {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
