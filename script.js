@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
             populateCertificationGraph(parsedData);
+            populateCertificationTable(parsedData);
             populateQualityGraph(parsedData);
         });
 });
@@ -47,6 +48,20 @@ function populateCertificationGraph(data) {
     Plotly.newPlot('certification-graph', [trace], layout);
 }
 
+function populateCertificationTable(data) {
+    const tableBody = document.getElementById("certification-table").getElementsByTagName("tbody")[0];
+
+    data.forEach(row => {
+        const tr = document.createElement("tr");
+        Object.values(row).forEach(value => {
+            const td = document.createElement("td");
+            td.textContent = value.trim();
+            tr.appendChild(td);
+        });
+        tableBody.appendChild(tr);
+    });
+}
+
 function populateQualityGraph(data) {
     const dimensions = [...new Set(data.map(row => row.Dimension))];
     const counts = dimensions.map(dim =>
@@ -54,8 +69,8 @@ function populateQualityGraph(data) {
     );
 
     const trace = {
-        x: dimensions,
-        y: counts,
+        labels: dimensions,
+        values: counts,
         type: "pie"
     };
 
