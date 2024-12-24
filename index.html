@@ -3,36 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Certification Tab</title>
+    <title>Website with Sidebar</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
-    <script defer src="script.js"></script>
 </head>
 <body>
-    <h1>Data Validation Dashboard</h1>
-    <div class="tabs">
-        <button class="tablinks" onclick="openTab(event, 'Certification')" id="defaultTab">Certification</button>
-        <button class="tablinks" onclick="openTab(event, 'Quality')">Quality</button>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#certification-quality">Certification & Quality</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
     </div>
 
-    <div id="Certification" class="tabcontent">
-        <h2>Certification Data</h2>
-        
-        <!-- Search input & button (placed at the top) -->
-        <div class="search-container">
-            <input type="text" id="searchInput" placeholder="Search by TableName..." />
-            <button onclick="searchData()">Search</button>
-        </div>
+    <!-- Main content -->
+    <div class="main-content">
+        <section id="home">
+            <h1>Welcome to Our Website</h1>
+            <p>Explore our content and learn more about our offerings.</p>
+        </section>
 
-        <!-- Table will be dynamically inserted here -->
-        <div id="tableContainer">
-            <!-- Table will be populated via JavaScript -->
-        </div>
+        <section id="about">
+            <h2>About Us</h2>
+            <p>Details about our company and history.</p>
+        </section>
+
+        <section id="certification-quality">
+            <h2>Certification & Quality</h2>
+            <p>Information about our certifications and quality standards.</p>
+        </section>
+
+        <section id="contact">
+            <h2>Contact Us</h2>
+            <p>Reach out to us for more information or assistance.</p>
+        </section>
     </div>
 
-    <div id="Quality" class="tabcontent">
-        <h2>Quality Data</h2>
-        <p>This section is under development.</p>
-    </div>
+    <script src="script.js"></script>
 </body>
 </html>
